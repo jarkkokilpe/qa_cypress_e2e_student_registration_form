@@ -26,6 +26,10 @@ describe('Student Registration page', () => {
     cy.get('input[id="userNumber"]').type('5551234567');
     cy.get('input[id="userNumber"]').should('have.value', '5551234567');
 
+    cy.get('input[id="dateOfBirthInput"]').click();
+    cy.get('.react-datepicker__month-select').select('April');
+    cy.get('.react-datepicker__year-select').select('2025');
+    cy.get('.react-datepicker__day--016').click();
     cy.get('input[id="dateOfBirthInput"]').should('have.value', '16 Apr 2025');
 
     cy.get('#subjectsInput').type('Maths');
@@ -55,5 +59,21 @@ describe('Student Registration page', () => {
     cy.get('.modal-title.h4')
       .should('be.visible')
       .and('contain', 'Thanks for submitting the form');
+
+    cy.get('.modal-title.h4')
+      .should('be.visible')
+      .and('contain', 'Thanks for submitting the form');
+
+    cy.get('table').within(() => {
+      cy.contains('td', 'John Doe').should('be.visible');
+      cy.contains('td', 'john@doe.com').should('be.visible');
+      cy.contains('td', 'Male').should('be.visible');
+      cy.contains('td', '5551234567').should('be.visible');
+      cy.contains('td', '16 April,2025').should('be.visible');
+      cy.contains('td', 'Maths').should('be.visible');
+      cy.contains('td', 'Sports').should('be.visible');
+      cy.contains('td', '123 Main Street, Springfield').should('be.visible');
+      cy.contains('td', 'NCR Delhi').should('be.visible');
+    });
   });
 });
