@@ -2,6 +2,8 @@
 
 describe('Student Registration page', () => {
   before(() => {
+    cy.intercept('https://*.google-analytics.com/**', { statusCode: 200 });
+    cy.intercept('https://*.ads.com/**', { statusCode: 200 });
     cy.visit('https://demoqa.com/automation-practice-form');
     // Prevent form submission by intercepting the request
     cy.intercept('POST', '**', (req) => {
